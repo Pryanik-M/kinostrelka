@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="static/css/index.css" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="premier-movie__container">
+    <div class="premier-movie__image-container">
+        <img src="static/premier/premier-poster.jpg" class="premier-movie__image" alt="Постер фильма">
+    </div>
+    <div class="premier-movie__text-container">
+        <h2 class="premier-movie__header">Иван Царевич и Серый Волк 6</h2>
+        <p class="premier-movie__description">«Иван Царевич и Серый Волк 6» - это очередная увлекательная история популярной анимационной серии, известной своим ярким визуальным стилем и захватывающими сюжетами, основанными на русских народных сказках.</p>
+        <div class="premier-movie__rating">
+            <span class="rating__value">9,2</span>
+            <span class="rating__text">Рейтинг Кинопоиска</span>
+        </div>
+        <button class="premier-movie__watch-button" onclick="location.href='{{ url_for('movie') }}?name=videos/primer.mp4'">
+            Смотреть фильм
+        </button>
+    </div>
+</div>
+
+<div class="new-movies">
+    <h2 class="new-movies__title">Новинки</h2>
+    <div class="carousel" id="carousel-new">
+        <div class="carousel-inner">
+            {% for movie in new_movies %}
+                <div class="carousel-item">
+                    <a class="new-movies__link" href="{{ url_for('movie_page', name=movie.name, desc=movie.description, poster=movie.poster_img) }}">
+                        <img src="static/posters/{{ movie.poster_img }}" class="new-movies__img" alt="{{ movie.name }}" onerror="this.onerror=null; this.src='static/posters/no-image.jpg';">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-control-next" onclick="nextSlide()">&#10095;</button>
+    </div>
+</div>
+<div class="recommended-movies">
+    <h2 class="recommended-movies__title">Рекомендуем</h2>
+    <div class="carousel" id="carousel-recommended">
+        <div class="carousel-inner">
+            {% for movie in recommended_movies %}
+                <div class="carousel-item">
+                    <a class="recommended-movies__link" href="{{ url_for('movie_page', name=movie.name, desc=movie.description, poster=movie.poster_img) }}">
+                        <img src="static/posters/{{ movie.poster_img }}" class="recommended-movies__img" alt="{{ movie.name }}" onerror="this.onerror=null; this.src='static/posters/no-image.jpg';">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" onclick="prevSlide('recommended')">&#10094;</button>
+        <button class="carousel-control-next" onclick="nextSlide('recommended')">&#10095;</button>
+    </div>
+</div>
+    {% if error %}
+        <script>alert('⚠️ У вас нет доступа к этой странице')</script>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="static/js/script.js"></script>
+{% endblock %}

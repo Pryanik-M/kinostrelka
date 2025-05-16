@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+{% endblock %}
+{% block content %}
+<div class="cinemas-filter">
+    <form method="post">
+        <label for="lat">Широта:</label>
+        <input type="text" id="lat" name="lat" required>
+        <label for="lon">Долгота:</label>
+        <input type="text" id="lon" name="lon" required>
+        <label for="radius">Радиус (км):</label>
+        <input type="number" id="radius" name="radius" required>
+        <input type="submit" value="Показать">
+    </form>
+</div>
+<div class="cinemas-container">
+    <div class="cinemas-map" id="map"></div>
+    <div class="cinemas-list">
+        <h2>Кинотеатры</h2>
+        <ul>
+            {% for cinema in cinemas %}
+                <li onclick="showCinemaOnMap({{ cinema.latitude }}, {{ cinema.longitude }})">{{ cinema.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([55.7558, 37.6173], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    var markers = [];
+    function showCinemaOnMap(lat, lon) {
+        map.setView([lat, lon], 15);
+        if (markers.length > 0) {
+            map.removeLayer(markers[0]);
+        }
+        var marker = L.marker([lat, lon]).addTo(map);
+        markers = [marker];
+    }
+    {% for cinema in cinemas %}
+        L.marker([{{ cinema.latitude }}, {{ cinema.longitude }}]).addTo(map).bindPopup('{{ cinema.name }}');
+    {% endfor %}
+</script>
+{% endblock %}

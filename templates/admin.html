@@ -1,0 +1,47 @@
+<!-- templates/admin.html -->
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="static/css/admin.css" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h2>Административная панель</h2>
+    <div class="added_films">
+    <form method="POST" enctype="multipart/form-data" class="movie-form">
+        <h3>Добавить новый фильм</h3>
+        <div class="form-group">
+            <label>Название фильма:</label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="form-group">
+        <label>Постер (изображение):</label>
+        <input type="file" name="poster" accept="image/*" required>
+        <small>Рекомендуемый размер: 300x450px</small>
+    </div>
+        <div class="form-group">
+            <label>Описание:</label>
+            <textarea name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Год выпуска:</label>
+            <input type="number" name="release_year" required>
+        </div>
+        <div class="form-group">
+            <label>Страна:</label>
+            <input type="text" name="country" required>
+        </div>
+        <div class="form-group">
+            <label>Жанр:</label>
+            <input type="text" name="genre" required>
+        </div>
+        <div class="form-group">
+            <label>Длительность:</label>
+            <input type="text" name="duration" required>
+        </div>
+        <button type="submit" class="button">Добавить фильм</button>
+    </form>
+        </div>
+</div>
+{% endblock %}

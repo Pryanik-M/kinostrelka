@@ -1,0 +1,120 @@
+:root {
+    --primary-red: #ff2e1f;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --border-color: #e0e0e0;
+    --card-bg: #ffffff;
+}
+
+.search-results {
+    background: #f8f8f8;
+    min-height: 100vh;
+    padding: 40px 0;
+}
+
+.results-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.results-title {
+    font-size: 28px;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.movie-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.poster-container {
+    position: relative;
+    height: 380px;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.movie-rating {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(0,0,0,0.7);
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.rating-value::after {
+    content: '★';
+    color: var(--primary-red);
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.movie-info {
+    padding: 15px;
+}
+
+.movie-title {
+    font-size: 18px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.movie-meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.movie-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .movies-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .poster-container {
+        height: 300px;
+    }
+
+    .results-title {
+        font-size: 24px;
+    }
+}

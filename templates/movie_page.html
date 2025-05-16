@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/movie_page.css">
+{% endblock %}
+
+{% block content %}
+<div class="movie__header">
+    <h1 class="movie__title">{{ movie_name }} <span class="movie__year">({{ release_year }})</span></h1>
+    <div class="movie__rating">
+        <div class="rating__value">7.8</div>
+        <div class="rating__details">Рейтинг Кинопоиска<br>345 678 оценок</div>
+    </div>
+</div>
+
+<div class="movie__container">
+    <div class="movie__poster-side">
+        <img src="static/posters/{{ movie_poster }}" class="movie__poster"
+             onerror="this.onerror=null; this.src='static/posters/no-image.jpg';">
+        <button class="movie__watch-button" onclick="location.href='{{ url_for('movie', name=movie_name) }}'">
+            ▶ Смотреть фильм
+        </button>
+    </div>
+
+    <div class="movie__info">
+        <div class="movie__meta">
+            <div class="meta__item">Год: {{ release_year }}</div>
+            <div class="meta__item">Жанр: {{ genres }}</div>
+            <div class="meta__item">Страна: {{ country }}</div>
+            <div class="meta__item">Время: {{ duration }}</div>
+        </div>
+
+        <h3 class="section-title">О фильме</h3>
+        <p class="movie__description">{{ movie_description }}</p>
+    </div>
+</div>
+{% endblock %}
